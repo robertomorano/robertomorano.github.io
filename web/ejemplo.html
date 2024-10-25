@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>
+	</title>
+</head>
+<body>
+	<form action="https://www.w3schools.com/action_page.php" method="post">
+    <fieldset>
+        <legend>Datos personales</legend>
+        <label for="nombre">Nombre de la receta </label>
+        <input name="nombre" id="nombre" type="text"><br>
+        <label for="email">Email: </label>
+        <input id="email" name="email" type="email"><br><br>
+        <label>Momento </label>
+        <input name="momento[]" type="checkbox" value="Desayuno">Desayuno 
+        <input name="momento[]" type="checkbox" value="Almuerzo">Almuerzo 
+        <input name="momento[]" type="checkbox" value="Noche">Noche <br><br>
+        <label for="ingredientes">Ingredientes </label>
+        <select name="ingredientes[]" id="ingredientes" multiple>
+            <option value="Carne">Carne</option>
+            <option value="Pescado">Pescado</option>
+            <option value="Verdura">Verdura</option>
+            <option value="Fruta">Fruta</option>
+        </select><br><br>
+               <label>Hora: </label>
+        <input name="hora[]" type="radio" value="0">0
+        <input name="hora[]" type="radio" value="1">1 
+        <input name="hora[]" type="radio" value="2">2<br><br>
+        <label>Minutos: </label>
+        <input name="Minutos[]" type="radio" value="0">0
+        <input name="Minutos[]" type="radio" value="15">15
+        <input name="Minutos[]" type="radio" value="30">30 
+        <input name="Minutos[]" type="radio" value="45">45<br><br>
+    </fieldset>
+    <input type="submit" name="enviar" value="Enviar">
+</form>
+
+</body>
+</html>
