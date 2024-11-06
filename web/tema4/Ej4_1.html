@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		
+		.mayus{
+			text-transform:uppercase;
+			text-decoration:line-through;
+		}
+		.derecha{
+			font-style: italic;
+			text-align: right;
+		}
+		.masgrande{
+			font-size:120%;
+		}
+		.sombra{
+			font-weight: bolder;
+			list-style-type: square;
+			text-shadow: -4px 3px 5px green;
+			list-style-type: green;
+		}
+		div{
+			position: relative;
+			display: inline-block;
+			width: 400px;
+			height: 200px;
+			border-radius: 15px;
+			
+		}
+		.div1{
+			background-color: green;
+		}
+		.div2{
+		 	top: 70px;
+			background-color:darkred;
+		}
+		.div3{
+			background-color:blue;
+		}
+		#interior{
+			width: 100px;
+			height: 50px;
+		}
+		.int1{
+
+			background-color:blue;
+		}
+		.int2{
+			
+			background-color:blue;
+		}
+		.int3{
+			
+			background-color:blue;
+		}
+		.int4{
+			display: block;
+			background-color:blue;
+		}
+		.int5{
+			display: block;
+			background-color:blue;
+		}
+		.int6{
+			display: block;
+			background-color:blue;
+		}
+	</style>
+	<title></title>
+</head>
+<body>
+	<h1>CSS:Ejercicio 1</h1>
+	<p class="derecha">Este es el parrafo 1</p>
+	<p class="mayus">Parrafo minusculas ahora no</p>
+	<p class="masgrande">No hay 2 sin tres</p>
+	<p class="sombra">texto en negreta con sombra verde</p>
+	<hr>
+	<div class="div1">
+		<p>Buscadores</p>
+		<div class="int4" id=interior><a></a></div>
+		<div class="int5" id=interior><a></a></div>
+		<div class="int6" id=interior><a></a></div>
+	</div>
+	<div class="div2">
+		<p>redes sociales</p>
+		<div class="int1" id=interior><a></a></div>
+		<div class="int2" id=interior></div>
+		<div class="int3" id=interior><a></a></div>
+	</div>
+	<div class="div3">
+		<p>norticias</p>
+		<p><a></a><a></a><a></a></p>
+	</div>
+</body>
