@@ -40,3 +40,16 @@ footer{
 	text-align: center;
 	padding: 15px;
 }
+#logo{
+	border: 2px solid black;
+	border-radius: 3px;
+	margin: 10px;
+}
+#logoplus{
+	position: relative;
+	left: 15%;
+	width: 75%;
+	display: flex;
+	border: 2px solid black;
+	border-radius: 3px;
+}
