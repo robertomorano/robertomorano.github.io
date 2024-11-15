@@ -1,0 +1,42 @@
+h1{
+	font-family: 'helvetica', sans-serif;
+}
+body{
+	background-color:#B5F4FF;
+}
+header{
+	background-color: #007bff
+}
+a{
+	text-decoration: none;
+	color: white;
+	padding: 10px;
+}
+a:hover{
+	color: grey;
+}
+#contenido{
+	display: flex;
+	padding: 10px;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	
+}
+#contenido h2{
+	font-size: 30px;
+}
+#contenido p{
+	font-size: 15px;
+	color: white;
+}
+img{
+	width: 300px;
+	height: 200px;
+}
+footer{
+	background-color: #333;
+	color: white;
+	text-align: center;
+	padding: 15px;
+}
