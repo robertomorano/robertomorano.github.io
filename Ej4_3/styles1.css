@@ -70,3 +70,18 @@ footer{
 	width: 20%;
     margin: auto;
 }
+#contacto{
+	display: flex; 
+    justify-content: center; 
+    align-items: center;
+	background-color: lightskyblue;
+    padding: 10px; 
+    margin: auto;
+}
+#contacto label {
+    display: block;
+}
+#contactoplus{
+	border: 2px solid black;
+	margin: 10px;
+}
