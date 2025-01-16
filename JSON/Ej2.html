@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<script src=https://code.jquery.com/jquery-3.7.1.min.js></script>
+</head>
+<body>
+            <label for="nombre">Nombre:</label>
+            <input id="nombre" placeholder="Ingresa tu nombre">
+   
+            <label for="apellidos">Apellidos:</label>
+            <input id="apellidos" placeholder="Ingresa tus apellidos">
+      
+            <label for="edad">Edad:</label>
+            <input id="edad" placeholder="Ingresa tu edad">
+     
+            <label for="ciudad">Ciudad:</label>
+            <input id="ciudad" placeholder="Ingresa tu ciudad">
+			
+            <button id="enviar">Enviar</button>
+   
+    <table border id="objeto">
+		<tr>
+			<th>Nombre</th>
+			<th>Apellido</th>
+			<th>Edad</th>
+			<th>Ciudad</th>
+		</tr>
+	</table>
+	<script type="text/javascript">
+		/*
+		let nombre = document.querySelector("#nombre");
+		let apellido =  document.querySelector("#apellido");
+		
+		let input = document.querySelectorAll(".input");
+		*/
+		
+		
+		$(document).ready(function(){
+			const enviar= document.querySelector("#enviar");
+			let filaCreada=false;
+			enviar.addEventListener("click", filaCreada=cogerInfo);
+			//$(".fila").addEventListener("click", eliminarTabla);
+			
+			
+			function introduceElemento(obj){
+				let a=true;
+				const tr = document.createElement("tr");
+				const table = document.querySelector("#objeto");
+				let claves = Object.keys(obj); 
+					for(let i=0; i< claves.length; i++){
+						if(obj[claves[i]]==""){
+							alert(claves[i]+ " Falta");
+							a = false;
+						}else if(a){
+						const td = document.createElement("td");
+						td.innerText = obj[claves[i]];
+						tr.appendChild(td);
+						tr.classList.add("fila");
+						table.appendChild(tr);
+						
+						}
+					}
+					 
+				}
+				if (filaCreada) {
+				    const table = document.querySelector("#objeto");
+				    const filas = document.querySelectorAll(".fila");
+				    filas.forEach((fila) => {
+				        fila.addEventListener("click", eliminar);
+				    });
+				}
+
+				function eliminar(event) {
+				    const fila = event.currentTarget;
+				    fila.remove(); 
+				}
+			function cogerInfo(){
+				let objJson = {
+					nombre: $("#nombre").val(),     	
+					apellidos: $("#apellidos").val(),
+					edad: $("#edad").val(),     	
+					ciudad: $("#ciudad").val()
+				}
+				console.log(objJson);
+				
+				introduceElemento(objJson);
+				return filaCreada = true;
+				}
+		}) 
+	</script>
+</body>
+</html>

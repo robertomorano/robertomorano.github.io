@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>
+		
+	</title>
+	<script src=https://code.jquery.com/jquery-3.7.1.min.js></script>
+</head>
+<body>
+	<table border>
+		<tr>
+			<th>Nombre</th>
+			<th>Apellido</th>
+			<th>Edad</th>
+			<th>Ciudad</th>
+		</tr>
+		<tr>
+			<td id=nombre></td>
+			<td id=apellido></td>
+			<td id=edad></td>
+			<td id=ciudad></td>
+		</tr>
+	</table>
+	<script>
+		function serializar(obj){
+			return JSON.stringify(obj);
+		}
+		function deserializar(obj){
+			return JSON.parse(obj)
+		}
+		const objeto = {
+			nombre: "l",
+			apellido : "a",
+			edad: 23,
+			ciudad : "grnanada"
+		}
+
+		$("#nombre").text(objeto.nombre);
+        $("#apellido").text(objeto.apellido);
+        $("#edad").text(objeto.edad);
+        $("#ciudad").text(objeto.ciudad);
+		/*const objeto_ser = serializar(objeto);
+		console.log(objeto_ser);
+		const obj_rec = deserializar(objeto_ser);
+		console.log(obj_rec);
+		$("#texto").text=texto;//Jquery 
+		*/
+		let objJson = {
+     	nombre: $("#nombre").val(),     	apellidos: $("#apellidos").val(),
+     	edad: $("#edad").val(),     	ciudad: $("#ciudad").val(),
+	};
+	// Objeto JavaScript a JSON
+	const json_serializado = serializar(objJson);
+	// JSON a objeto JavaScript
+	const objeto_recuperado = deserializar(json_serializado);
+	console.log(objJson);
+	console.log(json_serializado);
+	console.log(objeto_recuperado);
+	</script>
+
+</body>
+</html
