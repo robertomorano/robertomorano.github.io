@@ -40,11 +40,10 @@
 		
 		$(document).ready(function(){
 			const enviar= document.querySelector("#enviar");
-			let filaCreada=false;
-			enviar.addEventListener("click", filaCreada=cogerInfo);
+			enviar.addEventListener("click", cogerInfo);
+
 			//$(".fila").addEventListener("click", eliminarTabla);
-			
-			
+
 			function introduceElemento(obj){
 				let a=true;
 				const tr = document.createElement("tr");
@@ -60,23 +59,11 @@
 						tr.appendChild(td);
 						tr.classList.add("fila");
 						table.appendChild(tr);
-						
 						}
 					}
 					 
 				}
-				if (filaCreada) {
-				    const table = document.querySelector("#objeto");
-				    const filas = document.querySelectorAll(".fila");
-				    filas.forEach((fila) => {
-				        fila.addEventListener("click", eliminar);
-				    });
-				}
-
-				function eliminar(event) {
-				    const fila = event.currentTarget;
-				    fila.remove(); 
-				}
+				
 			function cogerInfo(){
 				let objJson = {
 					nombre: $("#nombre").val(),     	
@@ -87,7 +74,6 @@
 				console.log(objJson);
 				
 				introduceElemento(objJson);
-				return filaCreada = true;
 				}
 		}) 
 	</script>
