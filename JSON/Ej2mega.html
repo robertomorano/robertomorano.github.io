@@ -34,6 +34,7 @@
 		$(document).ready(function(){
 			const enviar= document.querySelector("#enviar");
 			enviar.addEventListener("click", cogerInfo);
+			let primeraFila=false;
 			let arrObj = [];
 			function cogerInfo(){
 				let objJson = {
@@ -45,13 +46,21 @@
 				arrObj.push(objJson);
 				console.log(arrObj);
 				console.log(objJson);
+				
 				introduceElemento(arrObj);
 				}
 			function introduceElemento(array){
 				let datoCompleto=true;
-				const tr = document.createElement("tr");
-				const table = document.querySelector("#objeto"); 
-					array.forEach(function crear(element, index){
+				const table = document.querySelector("#objeto");
+				if (primeraFila){
+					$(".fila").remove();
+				}
+				array.forEach(function crear(element, index){
+					const tr = document.createElement("tr");
+					const td = document.createElement("td");
+					td.innerText=index;
+					tr.appendChild(td);
+					table.appendChild(tr);	
 					let claves = Object.keys(element) 
 					for(let i=0; i< claves.length; i++){
 						if(element[claves[i]]==""){
@@ -64,10 +73,12 @@
 							tr.appendChild(td);
 							tr.classList.add("fila");
 							table.appendChild(tr);
+							primeraFila=true;
 						}
 					}
 				})
 			}
+		
 		})
 
 	</script>
