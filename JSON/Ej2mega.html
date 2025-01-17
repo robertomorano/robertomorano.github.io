@@ -74,10 +74,17 @@
 							tr.classList.add("fila");
 							table.appendChild(tr);
 							primeraFila=true;
+							if (primeraFila){
+								$(".fila").on("click", function() {
+                					$(this).remove();
+									array.splice(index, 1);
+            					});
+							}
 						}
 					}
 				})
 			}
+			
 		
 		})
 
