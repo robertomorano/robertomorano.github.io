@@ -23,6 +23,7 @@
    
     <table border id="objeto">
 		<tr>
+			<th>Indice</th>
 			<th>Nombre</th>
 			<th>Apellido</th>
 			<th>Edad</th>
@@ -30,40 +31,10 @@
 		</tr>
 	</table>
 	<script type="text/javascript">
-		/*
-		let nombre = document.querySelector("#nombre");
-		let apellido =  document.querySelector("#apellido");
-		
-		let input = document.querySelectorAll(".input");
-		*/
-		
-		
 		$(document).ready(function(){
 			const enviar= document.querySelector("#enviar");
 			enviar.addEventListener("click", cogerInfo);
-
-			//$(".fila").addEventListener("click", eliminarTabla);
-
-			function introduceElemento(obj){
-				let a=true;
-				const tr = document.createElement("tr");
-				const table = document.querySelector("#objeto");
-				let claves = Object.keys(obj); 
-					for(let i=0; i< claves.length; i++){
-						if(obj[claves[i]]==""){
-							alert(claves[i]+ " Falta");
-							a = false;
-						}else if(a){
-						const td = document.createElement("td");
-						td.innerText = obj[claves[i]];
-						tr.appendChild(td);
-						tr.classList.add("fila");
-						table.appendChild(tr);
-						}
-					}
-					$(".fila").forEach((fila) => fila.addEventListener("click", eliminarFila));
-				}
-				
+			let arrObj = [];
 			function cogerInfo(){
 				let objJson = {
 					nombre: $("#nombre").val(),     	
@@ -71,14 +42,34 @@
 					edad: $("#edad").val(),     	
 					ciudad: $("#ciudad").val()
 				}
+				arrObj.push(objJson);
+				console.log(arrObj);
 				console.log(objJson);
-				
-				introduceElemento(objJson);
+				introduceElemento(arrObj);
 				}
-			function eliminarFila(item) {
-				item.remove();	
+			function introduceElemento(array){
+				let datoCompleto=true;
+				const tr = document.createElement("tr");
+				const table = document.querySelector("#objeto"); 
+					array.forEach(function crear(element, index){
+					let claves = Object.keys(element) 
+					for(let i=0; i< claves.length; i++){
+						if(element[claves[i]]==""){
+							alert(claves[i]+ " Falta");
+							datoCompleto = false;
+						}
+						else if(datoCompleto){
+							const td = document.createElement("td");
+							td.innerText = element[claves[i]];
+							tr.appendChild(td);
+							tr.classList.add("fila");
+							table.appendChild(tr);
+						}
+					}
+				})
 			}
-		}) 
+		})
+
 	</script>
 </body>
 </html>
