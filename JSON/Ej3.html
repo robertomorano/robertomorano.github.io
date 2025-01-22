@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<script src=https://code.jquery.com/jquery-3.7.1.min.js></script>
+</head>
+<body>
+            <label for="nombre">Nombre:</label>
+            <input id="nombre" placeholder="Ingresa tu nombre">
+   
+            <label for="apellidos">Apellidos:</label>
+            <input id="apellidos" placeholder="Ingresa tus apellidos">
+      
+            <label for="edad">Edad:</label>
+            <input id="edad" placeholder="Ingresa tu edad">
+     
+            <label for="ciudad">Ciudad:</label>
+            <input id="ciudad" placeholder="Ingresa tu ciudad">
+			<input type="checkbox" id="vehicle1" name="hobbies" value="Bike">
+			<label for="vehicle1"> I have a bike</label><br>
+			<input type="checkbox" id="vehicle2" name="hobbies" value="Car">
+			<label for="vehicle2"> I have a car</label><br>
+			<input type="checkbox" id="vehicle3" name="hobbies" value="Boat">
+			<label for="vehicle3"> I have a boat</label><br>
+            
+
+            <button id="enviar">Enviar</button>
+   
+    <table border id="objeto">
+		<tr>
+			<th>Indice</th>
+			<th>Nombre</th>
+			<th>Apellido</th>
+			<th>Edad</th>
+			<th>Ciudad</th>
+			<th>Hobbiesssss</th>
+		</tr>
+	</table>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			const enviar= document.querySelector("#enviar");
+			enviar.addEventListener("click", cogerInfo);
+			let arrObj = [];
+
+
+			function fila(nombre, apellidos, edad, ciudad){
+				this.nombre = nombre;     	
+				this.apellidos = apellidos;
+				this.edad = edad;
+				this.ciudad = ciudad;
+				this.hobbies = $('input[name="hobbies"]').filter(':checked').map(function () {
+          			return $(this).val();
+					})
+				}
+
+
+			function cogerInfo(){
+				let objJson = new fila($("#nombre").val(),     	
+					 $("#apellidos").val(),
+					 $("#edad").val(),     	
+					 $("#ciudad").val(),);
+
+				arrObj.push(objJson);
+				console.log(arrObj);
+				console.log(objJson);
+				introduceElemento(arrObj);
+				}
+
+			function introduceElemento(array){
+				let datoCompleto=true;
+				const tr = document.createElement("tr");
+				const table = document.querySelector("#objeto"); 
+					array.forEach(function crear(element, index){
+					console.log(element);
+					let claves = Object.keys(element);
+					console.log(claves);
+					const td = document.createElement("td");
+					td.innerText= index;
+					tr.appendChild(td);
+					for(let i=0; i< claves.length; i++){
+						if(element[claves[i]]==""){
+							alert(claves[i]+ " Falta"); 
+							datoCompleto = false;
+						}else if(datoCompleto){
+							if(claves[i] === "hobbies"){
+								const ul = document.createElement("ul");
+								const td = document.createElement("td");
+								console.log(element[claves[i]].length)
+								for (let hobby; hobby<element[claves[i]].length; hobby++){
+									console.log(hobby);
+									const li = document.createElement("li");
+									li.innerText = element[claves[i]];
+									ul.appendChild(li);
+								}
+								td.appendChild(ul);
+								tr.appendChild(td);
+								tr.classList.add("fila");
+								table.appendChild(tr);
+							}else{
+								const td = document.createElement("td");
+								td.innerText = element[claves[i]];
+								tr.appendChild(td);
+								tr.classList.add("fila");
+								table.appendChild(tr);
+							}
+						}
+					}
+				})
+			}
+		})
+
+	</script>
+</body>
+</html>
