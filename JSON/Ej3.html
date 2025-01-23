@@ -70,9 +70,11 @@
 
 			function introduceElemento(array){
 				let datoCompleto=true;
-				const tr = document.createElement("tr");
+				$(".fila").remove();
+
 				const table = document.querySelector("#objeto"); 
 					array.forEach(function crear(element, index){
+					const tr = document.createElement("tr");
 					console.log(element);
 					let claves = Object.keys(element);
 					console.log(claves);
@@ -87,24 +89,24 @@
 							if(claves[i] === "hobbies"){
 								const ul = document.createElement("ul");
 								const td = document.createElement("td");
-								console.log(element[claves[i]].length)
-								for (let hobby; hobby<element[claves[i]].length; hobby++){
-									console.log(hobby);
+								let hobbie = $.makeArray(element[claves[i]])
+								for (hobby in hobbie){
 									const li = document.createElement("li");
-									li.innerText = element[claves[i]];
+									console.log(hobbie);
+									console.log(element[claves[i]]);
+									li.innerText = hobbie[hobby];
 									ul.appendChild(li);
 								}
 								td.appendChild(ul);
 								tr.appendChild(td);
-								tr.classList.add("fila");
-								table.appendChild(tr);
 							}else{
 								const td = document.createElement("td");
 								td.innerText = element[claves[i]];
 								tr.appendChild(td);
-								tr.classList.add("fila");
-								table.appendChild(tr);
 							}
+							
+							tr.classList.add("fila");
+							table.appendChild(tr);
 						}
 					}
 				})
