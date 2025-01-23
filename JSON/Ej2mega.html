@@ -54,8 +54,6 @@
 					ciudad: $("#ciudad").val()
 				}
 				arrObj.push(objJson);
-				console.log(arrObj);
-				console.log(objJson);
 				
 				introduceElemento(arrObj);
 				}
@@ -79,13 +77,17 @@
 						td.innerText = element[claves[i]];
 						tr.appendChild(td);
 						tr.classList.add("fila");
+						tr.id = index;
 					}
-					$(".fila").on("click", function() {
-							array.splice(index, 1);
-							//introduceElemento(array);
-					});
+					$(".fila").on("click", eliminar)
 					table.appendChild(tr);
 				})
+			}
+			function eliminar(){
+				console.log(arrObj);
+				console.log(this.id);
+				arrObj.splice(this.id, 1);
+				introduceElemento(arrObj);
 			}
 		})
 	</script>
