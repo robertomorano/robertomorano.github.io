@@ -34,8 +34,18 @@
 		$(document).ready(function(){
 			const enviar= document.querySelector("#enviar");
 			enviar.addEventListener("click", cogerInfo);
-			let primeraFila=false;
 			let arrObj = [];
+			iniciaTabla()
+			function iniciaTabla(){
+				const table = document.querySelector("#objeto");
+				const td = document.createElement("td");
+				const tr = document.createElement("tr");
+				td.innerText = "";
+				tr.appendChild(td);
+				tr.classList.add("fila");
+				tr.style.display = "none";
+				table.appendChild(tr);
+			}
 			function cogerInfo(){
 				let objJson = {
 					nombre: $("#nombre").val(),     	
@@ -50,11 +60,9 @@
 				introduceElemento(arrObj);
 				}
 			function introduceElemento(array){
-				let datoCompleto=true;
 				const table = document.querySelector("#objeto");
-				if (primeraFila){
-					$(".fila").remove();
-				}
+				$(".fila").remove();
+
 				array.forEach(function crear(element, index){
 					const tr = document.createElement("tr");
 					const td = document.createElement("td");
@@ -65,29 +73,21 @@
 					for(let i=0; i< claves.length; i++){
 						if(element[claves[i]]==""){
 							alert(claves[i]+ " Falta");
-							datoCompleto = false;
+							return;
 						}
-						else if(datoCompleto){
-							const td = document.createElement("td");
-							td.innerText = element[claves[i]];
-							tr.appendChild(td);
-							tr.classList.add("fila");
-							table.appendChild(tr);
-							primeraFila=true;
-							if (primeraFila){
-								$(".fila").on("click", function() {
-                					$(this).remove();
-									array.splice(index, 1);
-            					});
-							}
-						}
+						const td = document.createElement("td");
+						td.innerText = element[claves[i]];
+						tr.appendChild(td);
+						tr.classList.add("fila");
 					}
+					$(".fila").on("click", function() {
+							array.splice(index, 1);
+							//introduceElemento(array);
+					});
+					table.appendChild(tr);
 				})
 			}
-			
-		
 		})
-
 	</script>
 </body>
 </html>
