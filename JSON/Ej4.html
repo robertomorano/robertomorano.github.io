@@ -1,0 +1,30 @@
+<!<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+	<button type="button" onclick="solicitud()">Enviar</button>
+</body>
+<script>
+	function solicitud(){
+   	const xhr = new XMLHttpRequest();
+   	xhr.open("GET", "https://jsonplaceholder.typicode.com/users");
+   	xhr.responseType = "json"; // Si no se indica, necesitará parseo
+
+	// Preparamos a continuación la recepción
+	   	xhr.onload = function() {
+	       	if (xhr.readyState == 4 && xhr.status == 200) {
+	           	const data = xhr.response;
+	           	console.log(data);
+	       	} else {
+	           	console.log("Error: ${xhr.status}");
+	       	}
+	   	};
+	   	xhr.send();
+	}
+
+</script>
+</html>
