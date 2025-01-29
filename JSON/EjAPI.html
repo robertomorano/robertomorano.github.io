@@ -27,7 +27,11 @@
 			} 
 			});
 		console.log(datos);
+		construir(data);
 	});
-	
+	function construir(data){
+		$("p").text = "Tu IP: "+data.ip+ " es de "+data.capital +", "+ data.city +", "+data.continent;
+
+	}
 </script>
 </html>
