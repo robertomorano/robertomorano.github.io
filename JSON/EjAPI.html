@@ -20,14 +20,14 @@
 			dataType: "json", // Convierte la respuesta a objeto JSON 
 			success: function(data) { //200 o 201
 			//console.log(data);
-			 datos = data; 
+			construir(data);
+			datos = data; 
 			}, 
 			error: function(xhr, status, error) { 
 			console.log(`Error: ${xhr.status} - ${error}`); 
 			} 
 			});
-		console.log(datos);
-		construir(data);
+		
 	});
 	function construir(data){
 		$("p").text = "Tu IP: "+data.ip+ " es de "+data.capital +", "+ data.city +", "+data.continent;
