@@ -21,7 +21,7 @@
 		const bandera = document.querySelector("#bandera");
 		parrafo.innerText = "Tu IP: "+data.ip+ " es de "+data.capital +", "+ data.city +", "+data.continent;
 		div.appendChild(parrafo);
-		//bandera.appendChild(data);
+		bandera.appendChild(data.flag[img]);
 	}
 
 	$("#solicitud").on("click", e =>{
@@ -32,7 +32,6 @@
 			success: function(data) { //200 o 201
 			//console.log(data);
 			construir(data);
-			datos = data; 
 			}, 
 			error: function(xhr, status, error) { 
 			console.log(`Error: ${xhr.status} - ${error}`); 
