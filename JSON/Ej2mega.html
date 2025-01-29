@@ -64,10 +64,10 @@
 				array.forEach(function crear(element, index){
 					const tr = document.createElement("tr");
 					const td = document.createElement("td");
-					td.innerText=index;
+					td.innerText=index+1;
 					tr.appendChild(td);
 					table.appendChild(tr);	
-					let claves = Object.keys(element) 
+					let claves = Object.keys(element) //[nombre , apellido, -l,....]
 					for(let i=0; i< claves.length; i++){
 						if(element[claves[i]]==""){
 							alert(claves[i]+ " Falta");
