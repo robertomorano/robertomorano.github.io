@@ -9,7 +9,7 @@
 <body>
 	<label for="IP">Nombre:</label>
     <input id="IP" placeholder="Ingresa tu IP">
-	<button type="button" id="solicitud">Enviar Ajax</button>
+	<button type="button" id="solicitud">Enviar Solicitud</button>
 </body>
 <script>
 	let datos;
@@ -19,14 +19,15 @@
 			method: "GET", 
 			dataType: "json", // Convierte la respuesta a objeto JSON 
 			success: function(data) { //200 o 201
-			console.log(data);
+			//console.log(data);
 			 datos = data; 
 			}, 
 			error: function(xhr, status, error) { 
 			console.log(`Error: ${xhr.status} - ${error}`); 
 			} 
 			});
+		console.log(datos);
 	});
-	console.log(datos);
+	
 </script>
 </html>
