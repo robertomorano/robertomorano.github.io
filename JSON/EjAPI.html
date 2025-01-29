@@ -12,20 +12,21 @@
 	<button type="button" id="solicitud">Enviar Ajax</button>
 </body>
 <script>
+	let datos;
 	$("#solicitud").on("click", e =>{
 		$.ajax({ 
 			url: "https://ipwho.is/"+($("#IP").val()), 
 			method: "GET", 
 			dataType: "json", // Convierte la respuesta a objeto JSON 
 			success: function(data) { //200 o 201
-			console.log(data); 
+			console.log(data);
+			 datos = data; 
 			}, 
 			error: function(xhr, status, error) { 
 			console.log(`Error: ${xhr.status} - ${error}`); 
 			} 
 			});
-		console.log("https://ipwho.is/"+($("#IP").val()))
 	});
-
+	console.log(datos);
 </script>
 </html>
