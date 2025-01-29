@@ -10,9 +10,17 @@
 	<label for="IP">Nombre:</label>
     <input id="IP" placeholder="Ingresa tu IP">
 	<button type="button" id="solicitud">Enviar Solicitud</button>
+	<div id="texto"></div>
 </body>
 <script>
-	let datos;
+
+	function construir(data){
+		const div = document.querySelector("#texto");
+		const parrafo = document.createElement("p")
+		parrafo.text = "Tu IP: "+data.ip+ " es de "+data.capital +", "+ data.city +", "+data.continent;
+		div.appendChild()
+	}
+
 	$("#solicitud").on("click", e =>{
 		$.ajax({ 
 			url: "https://ipwho.is/"+($("#IP").val()), 
@@ -29,9 +37,6 @@
 			});
 		
 	});
-	function construir(data){
-		$("p").text = "Tu IP: "+data.ip+ " es de "+data.capital +", "+ data.city +", "+data.continent;
-
-	}
+	
 </script>
 </html>
