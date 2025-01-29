@@ -11,14 +11,17 @@
     <input id="IP" placeholder="Ingresa tu IP">
 	<button type="button" id="solicitud">Enviar Solicitud</button>
 	<div id="texto"></div>
+	<div id="bandera"></div>
 </body>
 <script>
 
 	function construir(data){
 		const div = document.querySelector("#texto");
-		const parrafo = document.createElement("p")
-		parrafo.text = "Tu IP: "+data.ip+ " es de "+data.capital +", "+ data.city +", "+data.continent;
-		div.appendChild()
+		const parrafo = document.createElement("p");
+		const bandera = document.querySelector("#bandera");
+		parrafo.innerText = "Tu IP: "+data.ip+ " es de "+data.capital +", "+ data.city +", "+data.continent;
+		div.appendChild(parrafo);
+		bandera.appendChild(data.)
 	}
 
 	$("#solicitud").on("click", e =>{
