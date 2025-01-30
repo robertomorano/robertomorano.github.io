@@ -16,7 +16,7 @@
 		</div>
 		<button type="button" id="solicitud" class="btn btn-primary">Enviar Solicitud</button>
 	
-		<div id="resultado" class="mt-4 d-none">
+		<div id="texto" class="mt-4 d-none">
 			<h4 id="nombrePais"></h4>
 			<p><strong>Capital:</strong> <span id="capital"></span></p>
 			<div id="bandera"></div>
@@ -27,6 +27,7 @@
 
 	function construir(data){
 		const div = document.querySelector("#texto");
+		div.innerHTML="";
 		const parrafo = document.createElement("p");
 		const bandera = document.querySelector("#bandera");
 		const pais = document.createElement("img");
