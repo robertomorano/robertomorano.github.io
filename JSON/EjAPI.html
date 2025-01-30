@@ -22,7 +22,7 @@
 		const pais = document.createElement(img);
 		parrafo.innerText = "Tu IP: "+data.ip+ " es de "+data.capital +", "+ data.city +", "+data.continent;
 		div.appendChild(parrafo);
-		pais.src = data.flag[img];	
+		pais.src = data.flag.img;	
 		bandera.appendChild();
 	}
 
@@ -32,7 +32,7 @@
 			method: "GET", 
 			dataType: "json", // Convierte la respuesta a objeto JSON 
 			success: function(data) { //200 o 201
-			//console.log(data);
+			console.log(data);
 			construir(data);
 			}, 
 			error: function(xhr, status, error) { 
