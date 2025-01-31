@@ -15,7 +15,7 @@
 			<label for="IP" class="form-label">Ingresa tu IP:</label>
 			<input type="text" id="IP" class="form-control" placeholder="Introduce tu IP">
 		</div>
-		<button type="button" id="solicitud" class="btn btn-succesful">Enviar Solicitud</button>
+		<button type="button" id="solicitud" class="btn btn-succes">Enviar Solicitud</button>
 	
 		<div id="texto" class="mt-4">
 			<h4 id="nombrePais"></h4>
@@ -23,14 +23,17 @@
 			<div id="bandera"></div>
 		</div>
 	</div>
+	<div id ="map"></div>
 </body>
 <script>
 
 	function construir(data){
 		const div = document.querySelector("#texto");
 		const capital = document.querySelector("#capital");
-		pais.innerHTML=data.city +", "+data.continent;
+		const city = document.querySelector("#nombrePais")
+		city.innerText= data.city +", "+data.continent;
 		capital.innerText = data.capital	
+		//mostrar bandera
 		const bandera = document.querySelector("#bandera");
 		const pais = document.createElement("img");
 		pais.src = data.flag.img;	
@@ -38,9 +41,11 @@
 		bandera.appendChild(pais);
 	}
 	function mostrarMapa(lat, lon, ciudad, pais) {
+		//const map = document.querySelector("#map");
         // Si el mapa ya está inicializado, actualiza la vista
-        if (map) {
-            map.setView([lat, lon], 12);
+       let map = L.map('map', { center: [lat, lon], zoom: 13});
+       /* if (map) {
+            map.setView([lat, lon], 12);	
         } else {
             // Inicializar el mapa
             map = L.map('map').setView([lat, lon], 12);
@@ -54,7 +59,7 @@
         // Agregar marcador con la ubicación
         L.marker([lat, lon]).addTo(map)
             .bindPopup(`<b>${ciudad}, ${pais}</b><br>Lat: ${lat}, Lon: ${lon}`)
-            .openPopup();
+            .openPopup(); */
     }
 
 	$("#solicitud").on("click", e =>{
