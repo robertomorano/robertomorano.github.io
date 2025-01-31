@@ -19,7 +19,7 @@
 	
 		<div id="texto" class="mt-4 d-none">
 			<h4 id="nombrePais"></h4>
-			<p><strong>Capital:</strong> <span id="capital"></span></p>
+			<p>Capital: <span id="capital"></span></p>
 			<div id="bandera"></div>
 		</div>
 	</div>
@@ -28,12 +28,12 @@
 
 	function construir(data){
 		const div = document.querySelector("#texto");
-		div.innerHTML="";
-		const parrafo = document.createElement("p");
+		const pais = document.querySelector("#nombrePais");
+		const capital = document.querySelector("#capital");
+		pais.innerHTML=data.city +", "+data.continent;
+		capital.innerText = data.capital	
 		const bandera = document.querySelector("#bandera");
 		const pais = document.createElement("img");
-		parrafo.innerText = "Tu IP: "+data.ip+ " es de "+data.capital +", "+ data.city +", "+data.continent;
-		div.appendChild(parrafo);
 		pais.src = data.flag.img;	
 		console.log(pais.src)
 		bandera.appendChild(pais);
