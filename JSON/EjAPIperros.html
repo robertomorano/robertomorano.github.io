@@ -1,4 +1,4 @@
-<!<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -19,7 +19,8 @@
 		
 	</div>
 <script type="text/javascript">
-		
+
+	$("#raza").on("click", crearURL);
 	function construir(data){
 		//mostrar foto
 		const perro = document.querySelector("#perro");
@@ -30,6 +31,55 @@
 		perro.appendChild(pais);
 	}
 
+	function crearSelect(data){
+      const select = document.querySelector("#raza");
+
+      for (let raza in data.message) {
+		const subRazas = data.message[raza];
+		if (subRazas.length === 0) {
+		const option = document.createElement("option");
+		option.value = raza;
+		option.text = raza;
+		select.add(option);
+		} else {
+		subRazas.forEach(subRaza => {
+			const option = document.createElement("option");
+			option.value = `${raza}-${subRaza}`;
+			option.text = `${raza} (${subRaza})`;
+			select.add(option);
+		});
+        }
+      }
+    }
+	function crearURL() {
+      const select = document.querySelector("#raza");
+      const selectedValue = select.value;
+
+      if (selectedValue.includes("-")) {
+        const [nacionalidad, raza] = selectedValue.split("-");
+        const url = `https://dog.ceo/api/breed/${nacionalidad}/${raza}/images/random`;
+		pedirImagen(url);
+      } else {
+        const url = `https://dog.ceo/api/breed/${selectedValue}/images/random`;
+		pedirImagen(url);
+      }
+	  
+    }
+	function pedirImagen(urlObtenida){
+		$.ajax({ 
+			//
+			url: urlObtenida, 
+			method: "GET", 
+			dataType: "json", // Convierte la respuesta a objeto JSON 
+			success: function(data) { //200 o 201
+			console.log(data);
+			construir(data);
+			}, 
+			error: function(xhr, status, error) { 
+			console.log(`Error: ${xhr.status} - ${error}`); 
+			} 
+		});
+	}
 	$("#aleatorio").on("click", e =>{
 		$.ajax({ 
 			//
@@ -44,9 +94,22 @@
 			error: function(xhr, status, error) { 
 			console.log(`Error: ${xhr.status} - ${error}`); 
 			} 
-			});
+		});
 		
 	});
+	$.ajax({ 
+		url: "https://dog.ceo/api/breeds/list/all", 
+		method: "GET", 
+		dataType: "json", // Convierte la respuesta a objeto JSON 
+		success: function(data) { //200 o 201
+		console.log(data);
+		crearSelect(data);
+		}, 
+		error: function(xhr, status, error) { 
+		console.log(`Error: ${xhr.status} - ${error}`); 
+		} 
+	});
+	
 </script>
 
 

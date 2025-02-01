@@ -41,25 +41,19 @@
 		bandera.appendChild(pais);
 	}
 	function mostrarMapa(lat, lon, ciudad, pais) {
-		//const map = document.querySelector("#map");
-        // Si el mapa ya está inicializado, actualiza la vista
-       let map = L.map('map', { center: [lat, lon], zoom: 13});
-       /* if (map) {
-            map.setView([lat, lon], 12);	
-        } else {
-            // Inicializar el mapa
-            map = L.map('map').setView([lat, lon], 12);
+		const mapdiv = document.querySelector("#map");
+		let map = L.map('map').setView([lat, lon], 13); 
 
-            // Agregar capa base con OpenStreetMap
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap contributors'
-            }).addTo(map);
-        }
+		// Añadir una capa de OpenStreetMap
+		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+		}).addTo(map);
 
-        // Agregar marcador con la ubicación
-        L.marker([lat, lon]).addTo(map)
-            .bindPopup(`<b>${ciudad}, ${pais}</b><br>Lat: ${lat}, Lon: ${lon}`)
-            .openPopup(); */
+		// Añadir un marcador
+		L.marker([lat, lon]).addTo(map)
+		.bindPopup('¡Hola! esto es '+ciudad+", "+pais)
+		.openPopup();
+		mapdiv.appendChild(mapdiv);
     }
 
 	$("#solicitud").on("click", e =>{
