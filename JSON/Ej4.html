@@ -3,28 +3,137 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src=https://code.jquery.com/jquery-3.7.1.min.js></script>
 	<title></title>
 </head>
 <body>
-	<button type="button" onclick="solicitud()">Enviar</button>
+            <label for="nombre">Nombre:</label>
+            <input id="nombre" placeholder="Ingresa tu nombre">
+   
+            <label for="apellidos">Apellidos:</label>
+            <input id="apellidos" placeholder="Ingresa tus apellidos">
+      
+            <label for="edad">Edad:</label>
+            <input id="edad" placeholder="Ingresa tu edad">
+     
+            <label for="ciudad">Ciudad:</label>
+            <input id="ciudad" placeholder="Ingresa tu ciudad">
+			<input type="checkbox" id="vehicle1" name="hobbies[]" value="Bike">
+			<label for="vehicle1"> I have a bike</label><br>
+			<input type="checkbox" id="vehicle2" name="hobbies[]" value="Car">
+			<label for="vehicle2"> I have a car</label><br>
+			<input type="checkbox" id="vehicle3" name="hobbies[]" value="Boat">
+			<label for="vehicle3"> I have a boat</label><br>
+            
+
+            <button id="enviar">Enviar</button>
+   
+    <table border id="objeto">
+		<tr>
+			<th>Indice</th>
+			<th>Nombre</th>
+			<th>Apellido</th>
+			<th>Edad</th>
+			<th>Ciudad</th>
+			<th>Hobbiesssss</th>
+		</tr>
+	</table>
+	<button type="button" id= "servidor">Enviar a servidor</button>
 </body>
 <script>
-	function solicitud(){
-   	const xhr = new XMLHttpRequest();
-   	xhr.open("GET", "https://jsonplaceholder.typicode.com/users");
-   	xhr.responseType = "json"; // Si no se indica, necesitará parseo
+	$(document).ready(function(){
+			const enviar= document.querySelector("#enviar");
+			enviar.addEventListener("click", cogerInfo);
+			let arrObj = [];
 
-	// Preparamos a continuación la recepción
-	   	xhr.onload = function() {
-	       	if (xhr.readyState == 4 && xhr.status == 200) {
-	           	const data = xhr.response;
-	           	console.log(data);
-	       	} else {
-	           	console.log("Error: ${xhr.status}");
-	       	}
-	   	};
-	   	xhr.send();
-	}
+			$("#servidor").on("click", () =>{
+				console.log(arrObj);
+				envio(arrObj);
+			});
 
+			function fila(nombre, apellidos, edad, ciudad){
+				this.nombre = nombre;     	
+				this.apellidos = apellidos;
+				this.edad = edad;
+				this.ciudad = ciudad;
+				this.hobbies = $('input[name="hobbies"]').filter(':checked').map(function () {
+          			return $(this).val();
+					})
+				}
+
+
+			function cogerInfo(){
+				let objJson = new fila($("#nombre").val(),     	
+					 $("#apellidos").val(),
+					 $("#edad").val(),     	
+					 $("#ciudad").val(),);
+
+				arrObj.push(objJson);
+				console.log(arrObj);
+				console.log(objJson);
+				introduceElemento(arrObj);
+				
+				}
+			function envio(objeto_js) {
+			    $.ajax({
+			        url: "https://lm.iesnervion.es/eco.php",
+			        method: "POST",
+			        data: JSON.stringify(objeto_js),
+			        contentType: "application/json", // Especifica el tipo de contenido
+			        dataType: "json", // La respuesta será interpretada como JSON
+			        success: function(response) {
+			            console.log(response);
+			        },
+			        error: function(xhr, status, error) {
+			            console.log(`Error: ${xhr.status} - ${error}`);
+			        }
+			    });
+			}
+
+
+			function introduceElemento(array){
+				let datoCompleto=true;
+				$(".fila").remove();
+
+				const table = document.querySelector("#objeto"); 
+					array.forEach(function crear(element, index){
+					const tr = document.createElement("tr");
+					console.log(element);
+					let claves = Object.keys(element);
+					console.log(claves);
+					const td = document.createElement("td");
+					td.innerText= index;
+					tr.appendChild(td);
+					for(let i=0; i< claves.length; i++){
+						if(element[claves[i]]==""){
+							alert(claves[i]+ " Falta"); 
+							datoCompleto = false;
+						}else if(datoCompleto){
+							if(claves[i] === "hobbies"){
+								const ul = document.createElement("ul");
+								const td = document.createElement("td");
+								let hobbie = $.makeArray(element[claves[i]])
+								for (hobby in hobbie){
+									const li = document.createElement("li");
+									console.log(hobbie);
+									console.log(element[claves[i]]);
+									li.innerText = hobbie[hobby];
+									ul.appendChild(li);
+								}
+								td.appendChild(ul);
+								tr.appendChild(td);
+							}else{
+								const td = document.createElement("td");
+								td.innerText = element[claves[i]];
+								tr.appendChild(td);
+							}
+							
+							tr.classList.add("fila");
+							table.appendChild(tr);
+						}
+					}
+				})
+			}
+		})
 </script>
 </html>
