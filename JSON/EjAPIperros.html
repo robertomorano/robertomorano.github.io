@@ -10,7 +10,7 @@
 <body>
 	<div class="container text-center">
 		<h3 class="mb-3">Selecciona una raza </h3>
-		<button type="button" id="aleatorio" class="btn btn-succes">Aleatorio</button>
+		<button type="button" id="aleatorio" class="btn btn-success">Aleatorio</button>
 	</div>
 	<select id="raza">
 		<option value="">Seleccione una raza</option>
@@ -20,7 +20,7 @@
 	</div>
 <script type="text/javascript">
 
-	$("#raza").on("click", crearURL);
+	$("#raza").on("change", crearURL);
 	function construir(data){
 		//mostrar foto
 		const perro = document.querySelector("#perro");
@@ -37,10 +37,10 @@
       for (let raza in data.message) {
 		const subRazas = data.message[raza];
 		if (subRazas.length === 0) {
-		const option = document.createElement("option");
-		option.value = raza;
-		option.text = raza;
-		select.add(option);
+			const option = document.createElement("option");
+			option.value = raza;
+			option.text = raza;
+			select.add(option);
 		} else {
 		subRazas.forEach(subRaza => {
 			const option = document.createElement("option");
