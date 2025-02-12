@@ -1,4 +1,4 @@
-<!<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -54,7 +54,7 @@
 			function fila(nombre, apellidos, edad, ciudad){
 				this.nombre = nombre;     	
 				this.apellidos = apellidos;
-				this.edad = edad;
+				this.edad = Number(edad);
 				this.ciudad = ciudad;
 				this.hobbies = $('input[name="hobbies"]').filter(':checked').map(function () {
           			return $(this).val();
@@ -66,13 +66,13 @@
 				let objJson = new fila($("#nombre").val(),     	
 					 $("#apellidos").val(),
 					 $("#edad").val(),     	
-					 $("#ciudad").val(),);
+					 $("#ciudad").val());
 
 				arrObj.push(objJson);
-				console.log(arrObj);
-				console.log(objJson);
+				//console.log(arrObj);
+				//console.log(objJson);
 				introduceElemento(arrObj);
-				
+				envio(arrObj);
 				}
 			function envio(objeto_js) {
 			    $.ajax({
@@ -83,6 +83,7 @@
 			        dataType: "json", // La respuesta será interpretada como JSON
 			        success: function(response) {
 			            console.log(response);
+
 			        },
 			        error: function(xhr, status, error) {
 			            console.log(`Error: ${xhr.status} - ${error}`);

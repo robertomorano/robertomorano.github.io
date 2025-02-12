@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src=https://code.jquery.com/jquery-3.7.1.min.js></script>
+	<title></title>
+</head>
+<body>
+            <label for="descripcion">descripcion:</label>
+            <input id="descripcion" placeholder="Ingresa la descripcion">
+   
+            <label for="idProveedor">ID del Proveedor:</label>
+            <input id="idProveedor">
+      
+            <label for="precio">Precio:</label>
+            <input id="precio" placeholder="">
+            
+            <button id="enviar">Enviar</button>
+   <div id= "mensajeError"></div>
+    <table border id="objeto">
+		<tr>
+		
+		</tr>
+	</table>
+</body>
+<script>
+	$(document).ready(function(){
+			const enviar= document.querySelector("#enviar");
+			enviar.addEventListener("click", cogerInfo);
+			let arrObj = [];
+
+
+			function Fila(descripcion, idProveedor, precio){
+				if(descripcion.length < 255){
+					this.descripcion = descripcion;     	
+				}
+				this.idProveedor = idProveedor;
+
+				this.precio = Number.parseFloat(precio).toFixed(2);;
+			}
+
+
+			function cogerInfo(){
+				let objJson = new Fila($("#descripcion").val(),     	
+					 $("#idProveedor").val(),
+					 $("#precio").val());
+
+				arrObj.push(objJson);
+				console.log(arrObj);
+				envio(arrObj);
+				}
+
+			function envio(objeto_js) {
+			    $.ajax({
+			        url: "https://lm.iesnervion.es/reto4.php",
+			        method: "POST",
+			        data: JSON.stringify(objeto_js),
+			        contentType: "application/json", // Especifica el tipo de contenido
+			        dataType: "json", // La respuesta será interpretada como JSON
+			        success: function(response) {
+			            console.log(response);
+			            controlarError(response.error);
+			        },
+			        error: function(xhr, status, error) {
+			            console.log(`Error: ${xhr.status} - ${error}`);
+			        }
+			    });
+			}
+			function controlarError(error){
+				const mensajeError = document.querySelector("#mensajeError");
+				const h2 = document.createElement("h2");
+				h2.style.color = "red";
+				h2.innerText = error;
+				mensajeError.appendChild(h2);
+			}
+
+
+		
+		})
+</script>
+</html>
