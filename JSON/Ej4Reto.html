@@ -48,7 +48,7 @@
 
 				arrObj.push(objJson);
 				console.log(arrObj);
-				envio(arrObj);
+				envio(objJson);
 				}
 
 			function envio(objeto_js) {
@@ -61,6 +61,7 @@
 			        success: function(response) {
 			            console.log(response);
 			            controlarError(response.error);
+			            
 			        },
 			        error: function(xhr, status, error) {
 			            console.log(`Error: ${xhr.status} - ${error}`);
