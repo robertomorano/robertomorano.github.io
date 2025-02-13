@@ -61,6 +61,7 @@
 			        success: function(response) {
 			            console.log(response);
 			            controlarError(response.error);
+						introduceElemento(response);
 			            //xhr.open("DELETE", url+"?"+nombreVariable+"=" + valorVariable, true);
 			        },
 			        error: function(xhr, status, error) {
@@ -81,13 +82,13 @@
 				$(".fila").remove();
 
 				const table = document.querySelector("#objeto"); 
-					array.forEach(function crear(element, index){
+				array.forEach(function crear(element, index){
 					const tr = document.createElement("tr");
 					console.log(element);
 					let claves = Object.keys(element);
 					console.log(claves);
 					const td = document.createElement("td");
-					td.innerText= element.id;
+					td.innerText = element.id;
 					tr.id = element.id;
 					tr.appendChild(td);
 					for(let i=0; i< claves.length; i++){
@@ -107,9 +108,43 @@
 					}
 				})
 			}
-			function eliminar(){
+			function introduceElemento(array) {
+				let datoCompleto = true;
+				$(".fila").remove();
+
+				const table = document.querySelector("#objeto");
+
+				array.forEach(function (element) {
+					const tr = document.createElement("tr");
+					let claves = Object.keys(element);
+					const tdId = document.createElement("td");
+
+					tdId.innerText = element.id;
+					tr.id = element.id;
+					tr.appendChild(tdId);
+
+					for (let i = 0; i < claves.length; i++) {
+						if (element[claves[i]] === "") {
+							alert(claves[i] + " Falta");
+							datoCompleto = false;
+						} else if (datoCompleto) {
+							const td = document.createElement("td");
+							td.innerText = element[claves[i]];
+							tr.appendChild(td);
+						}
+					}
+					if (datoCompleto) {
+						tr.classList.add("fila");
+						tr.on("click", function() {
+							eliminar(tr.id);
+						});
+						table.appendChild(tr);
+					}
+    			});
+}
+			function eliminar(idTr){
 				    $.ajax({
-			        url: "https://lm.iesnervion.es/reto4.php",
+			        url: `https://lm.iesnervion.es/reto4.php?id=${idTr}`,
 			        method: "DELETE",
 			        data: JSON.stringify(objeto_js),
 			        contentType: "application/json", // Especifica el tipo de contenido
