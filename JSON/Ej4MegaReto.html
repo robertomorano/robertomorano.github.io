@@ -61,7 +61,7 @@
 			        success: function(response) {
 			            console.log(response);
 			            controlarError(response.error);
-						introduceElemento(response);
+						introduceElemento(response.lista);
 			            //xhr.open("DELETE", url+"?"+nombreVariable+"=" + valorVariable, true);
 			        },
 			        error: function(xhr, status, error) {
@@ -77,37 +77,6 @@
 				mensajeError.appendChild(h2);
 			}
 
-			function introduceElemento(array){
-				let datoCompleto=true;
-				$(".fila").remove();
-
-				const table = document.querySelector("#objeto"); 
-				array.forEach(function crear(element, index){
-					const tr = document.createElement("tr");
-					console.log(element);
-					let claves = Object.keys(element);
-					console.log(claves);
-					const td = document.createElement("td");
-					td.innerText = element.id;
-					tr.id = element.id;
-					tr.appendChild(td);
-					for(let i=0; i< claves.length; i++){
-						if(element[claves[i]]==""){
-							alert(claves[i]+ " Falta"); 
-							datoCompleto = false;
-						}else if(datoCompleto){
-							
-							const td = document.createElement("td");
-							td.innerText = element[claves[i]];
-							tr.appendChild(td);
-							tr.on("click", eliminar(tr.id));
-							
-							tr.classList.add("fila");
-							table.appendChild(tr);
-						}
-					}
-				})
-			}
 			function introduceElemento(array) {
 				let datoCompleto = true;
 				$(".fila").remove();
@@ -135,8 +104,8 @@
 					}
 					if (datoCompleto) {
 						tr.classList.add("fila");
-						tr.on("click", function() {
-							eliminar(tr.id);
+						tr.addEventListener("click", () => {
+								eliminar(tr.id)	
 						});
 						table.appendChild(tr);
 					}
@@ -146,13 +115,13 @@
 				    $.ajax({
 			        url: `https://lm.iesnervion.es/reto4.php?id=${idTr}`,
 			        method: "DELETE",
-			        data: JSON.stringify(objeto_js),
+			        data: JSON.stringify(idTr),
 			        contentType: "application/json", // Especifica el tipo de contenido
 			        dataType: "json", // La respuesta será interpretada como JSON
 			        success: function(response) {
 			            console.log(response);
 			            controlarError(response.error);
-			            introduceElemento(response)
+			            introduceElemento(response.lista);	
 			            //xhr.open("DELETE", url+"?"+nombreVariable+"=" + valorVariable, true);
 			        },
 			        error: function(xhr, status, error) {
