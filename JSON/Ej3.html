@@ -45,7 +45,7 @@
 			let arrObj = [];
 
 
-			function fila(nombre, apellidos, edad, ciudad){
+			function Fila(nombre, apellidos, edad, ciudad){
 				this.nombre = nombre;     	
 				this.apellidos = apellidos;
 				this.edad = edad;
@@ -57,14 +57,15 @@
 
 
 			function cogerInfo(){
-				let objJson = new fila($("#nombre").val(),     	
+				let objJson = new Fila($("#nombre").val(),     	
 					 $("#apellidos").val(),
 					 $("#edad").val(),     	
 					 $("#ciudad").val(),);
 
 				arrObj.push(objJson);
-				console.log(arrObj);
-				console.log(objJson);
+				//console.log(arrObj);
+				//console.log(objJson);
+				simulacro(objJson);
 				introduceElemento(arrObj);
 				}
 
@@ -89,7 +90,7 @@
 							if(claves[i] === "hobbies"){
 								const ul = document.createElement("ul");
 								const td = document.createElement("td");
-								let hobbie = $.makeArray(element[claves[i]])
+								let hobbie = $.makeArray(element[claves[i]]);
 								for (hobby in hobbie){
 									const li = document.createElement("li");
 									console.log(hobbie);
@@ -112,7 +113,19 @@
 				})
 			}
 		})
+	function simulacro(lista) {
+		let lista_serializada = serializar(lista);
+		let lista_NOserializada = deserializar(lista_serializada)
+		console.log(lista_NOserializada);
+	}
 
+    function serializar(objeto) {
+        return JSON.stringify(objeto);
+    }
+
+    function deserializar(objJson) {
+        return JSON.parse(objJson);
+    }
 	</script>
 </body>
 </html>
