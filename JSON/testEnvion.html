@@ -1,0 +1,93 @@
+<!<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<script src=https://code.jquery.com/jquery-3.7.1.min.js></script>
+</head>
+<body>
+	
+	<button type="button" id="xmlEnv">Enviar</button>
+	<button type="button" id="xmlGet">Recibir</button>
+	<button type="button" id="AjaxEnv">Enviar Ajax</button>
+	<button type="button" id="AjaxGet">Recibir</button>
+	<button type="button" id="JqueryEnv">Enviar Jquery</button>
+	<button type="button" id="JqueryGet">Recibir</button>
+</body>
+<script>
+	objeto = {
+		nombre: "a",	
+		status: "si",
+		edad: 22
+	}
+	$("#xmlEnv").on("click", solicitud);
+	$("#xmlGet").on("click", envio(objeto));
+	$("#AjaxEnv").on("click", e =>{
+		$.ajax({ 
+			url: "https://jsonplaceholder.typicode.com/users", 
+			method: "GET", 
+			dataType: "json", // Convierte la respuesta a objeto JSON 
+			success: function(data) { //200 o 201
+			console.log(data); 
+			}, 
+			error: function(xhr, status, error) { 
+			console.log(`Error: ${xhr.status} - ${error}`); 
+			} 
+			});
+
+	});
+	$("#AjaxGet").on("click", e =>{
+		$.ajax({
+	        url: "https://jsonplaceholder.typicode.com/posts",
+	        method: "POST",
+	        data: JSON.stringify(objeto),
+	        contentType: "application/json", // Especifica el tipo de contenido
+	        dataType: "json", // La respuesta será interpretada como JSON
+	        success: function(response) {
+	            console.log(response);
+	        },
+	        error: function(xhr, status, error) {
+	            console.log(`Error: ${xhr.status} - ${error}`);
+	        }
+    	});
+	});
+		
+
+
+
+	function solicitud(){
+   	const xhr = new XMLHttpRequest();
+   	xhr.open("GET", "https://jsonplaceholder.typicode.com/users");
+   	xhr.responseType = "json"; // Si no se indica, necesitará parseo
+
+	// Preparamos a continuación la recepción
+	   	xhr.onload = function() {
+	       	if (xhr.readyState == 4 && xhr.status == 200) {
+	           	const data = xhr.response;
+	           	console.log(data);
+	       	} else {
+	           	console.log("Error: ${xhr.status}");
+	       	}
+	   	};
+	   	xhr.send();
+	}
+	function envio(objeto_js){
+   	const xhr = new XMLHttpRequest();
+   	xhr.open("POST", "https://jsonplaceholder.typicode.com/posts");
+	xhr.responseType = "json"; // Si no se indica, necesitará parseo
+
+// Preparamos a continuación la respuesta
+   	xhr.onload = function() {
+       	if (xhr.readyState == 4 && xhr.status == 201) { // 200 || 201
+           	console.log(xhr.response);
+       	} else {
+           	console.log("Error: ${xhr.status}");
+       	}
+   	};
+   	xhr.send(JSON.stringify(objeto_js));
+}
+
+
+</script>
+</html>
