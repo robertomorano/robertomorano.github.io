@@ -19,5 +19,8 @@ class TareaView{
             });
         });
     }
+    botonAñadir(funcionAñadir){
+        $("#añadir").on("click", funcionAñadir);
+    }
    
 }
