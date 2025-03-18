@@ -15,12 +15,15 @@ class TareaView{
             let td = $("<td></td>");
             let button = $("<button>Eliminar</button>");
             button.click(() => {
-                this.onDeleteTarea(index);
+                this.botonEliminar(index);
             });
         });
     }
     botonAñadir(funcionAñadir){
         $("#añadir").on("click", funcionAñadir);
     }
+   accionEliminar(funcionEliminar){
+    this.botonEliminar = funcionEliminar;
+   }
+} 
    
-}
