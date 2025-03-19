@@ -1,41 +1,36 @@
 class TareasModel {
     constructor() {
-        this.TareasArray = [];
+        this.cont = 0;
+        this.tareasArray = [];
     }
+    
     id;
     descripcion;
-    estado = false;
+    estado = "pendiente";
     fecha;
     
-    Tareas(id, estado, fecha) {
-        this.id = id;
-        this.estado = estado;
-        this.fecha = fecha;
-    }
+   
     añadirTarea(tarea) {
-        this.Tareas.push(tarea);
+        let obj = {
+            id: (this.cont++),
+            descripcion : tarea[0],
+            fecha : tarea[1],
+            estado : "pendiente"
+        }
+        this.tareasArray.push(obj);
     }
-    getDni(){
-        return this.id;
-    }
-    getEstado(){
-        return this.estado;
-    }
-    changeEstado(){
-        if(this.estado == "pendiente"){
-            this.estado = "realizada";
+    
+    changeEstado(index){
+        
+        if(this.tareasArray[index].estado == "pendiente"){
+            this.tareasArray[index].estado = "realizada";
         }else{
-            this.estado = "pendiente";
+            this.tareasArray[index].estado = "pendiente";
         }
     }
-    getFecha(){
-        return this.fecha;
-    }
-    setFecha(fecha){
-        this.fecha = fecha;
-    }
+
     buscarPorID(id){
-        this.Tareas.forEach(e => {
+        this.tareasArray.forEach(e => {
             if(id == e.id){
                 return e;
             }
@@ -43,7 +38,7 @@ class TareasModel {
     }
     eliminarTarea(id){
         let e = this.buscarPorID(id);        
-        this.Tareas.splice(e, 1);
+        this.tareasArray.splice(e, 1);
     } 
 
 }
