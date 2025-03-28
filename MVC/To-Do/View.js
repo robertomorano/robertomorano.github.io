@@ -8,24 +8,29 @@ class TareasView{
     }
     renderTareas(tareas){
         $("#tareas").empty();
+        let cont = 1;
         tareas.forEach((tarea, index) => {
-            let tr = $("<tr></tr>");
-            tr.append(`<td id=${index}>`+tarea.id+"</td>");
-            tr.append("<td>"+tarea.descripcion+"</td>");
-            let tdEstado = $("<td></td>");
-            tdEstado.text(tarea.estado);
-            tdEstado.click(() => {
-                this.botonEstado(index);
-            })
-            tr.append(tdEstado);
-            let tdElim = $("<td></td>");
-            let button = $("<button>Eliminar</button>");
-            button.click(() => {
-                this.botonEliminar(tarea.id);
-            });
-            tdElim.append(button);
-            tr.append(tdElim);
-            $("#tareas").append(tr);
+            if(tarea.getBorrar() === null){
+                let tr = $("<tr></tr>");
+                tr.append(`<td>`+cont+"</td>");
+                //tr.append(`<td id=${index}>`+tarea.getId()+"</td>");
+                tr.append("<td>"+tarea.getDescripcion()+"</td>");
+                let tdEstado = $("<td></td>");
+                tdEstado.text(tarea.getEstado());
+                tdEstado.click(() => {
+                    this.botonEstado(index);
+                })
+                tr.append(tdEstado);
+                let tdElim = $("<td></td>");
+                let button = $("<button>Eliminar</button>");
+                button.click(() => {
+                    this.botonEliminar(index);
+                });
+                tdElim.append(button);
+                tr.append(tdElim);
+                $("#tareas").append(tr);
+                cont++;
+            }
         });
     }
     botonAñadir(funcionAñadir){

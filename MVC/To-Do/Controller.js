@@ -19,8 +19,8 @@ class TareasController{
         this.vista.renderTareas(this.modelo.tareasArray);
     }
 
-    eliminarTareas(id){
-        this.modelo.eliminarTarea(id);
+    eliminarTareas(index){
+        this.modelo.eliminarTarea(index);
         this.actualizarVista();
     }
     actualizarVista(){
