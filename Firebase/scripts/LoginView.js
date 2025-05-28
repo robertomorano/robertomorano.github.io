@@ -1,7 +1,7 @@
 class LoginView{
     constructor(){
-        const loginBtn = $("#btnLogin");
-        const registerBtn =  $("#btnRegister");
+        this.loginBtn = $("#btnLogin");
+        this.registerBtn =  $("#btnRegister");
     }
     cleanInputs(){
         $("#username").val("");
@@ -27,10 +27,13 @@ class LoginView{
     }
     // Functions for the buttons
     loginAction(loginFunction){
-        this.loginAction = loginFunction;
+        this.loginBtn.on("click",loginFunction);
+        console.log("Login action set");
     }
     registerAction(registerFunction){
-        this.registerAction = registerFunction;
+        this.registerBtn.on("click",registerFunction);
+        console.log("Register action set");
     }
 
 }
+export default LoginView;
