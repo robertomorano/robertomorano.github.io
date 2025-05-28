@@ -10,8 +10,14 @@ class LoginView{
     getData(){
         const username = $("#username").val();
         const password = $("#password").val();
-        if (username === "" || password === "") {
-            alert("Please fill in all fields.");
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (
+            username === "" ||
+            password === "" ||
+            password.length < 6 ||
+            !emailRegex.test(username)
+        ) {
+            alert("Please fill in all fields and enter a valid email.");
             return null;
         }
         return {
@@ -19,12 +25,7 @@ class LoginView{
             password
         };
     }
-    showSuccessMessage(){
-        const success = document.createElement("div");
-        success.className = "alert alert-success";
-        success.innerHTML = "Login successful!";
-        document.body.appendChild(success);
-    }
+    
     showSuccessMessage(texto){
         const success = document.createElement("div");
         success.className = "alert alert-success";

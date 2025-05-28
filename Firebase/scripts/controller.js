@@ -17,7 +17,7 @@ class Controller {
         if (data) {
             try {
                 await this.model.iniciarSesion(data.username, data.password);
-                this.view.showSuccessMessage();
+                this.view.showSuccessMessage("Login successful");
                 console.log("Login successful");
                 return true;
             } catch (error) {
@@ -43,7 +43,7 @@ class Controller {
         try {
             const userCredential = await this.model.registrarUsuario(username, password);
             await this.model.guardarDatosUsuario(userCredential.user.uid, { username: username });
-            this.view.showSuccessMessage();
+            this.view.showSuccessMessage(!"User registered successfully");
             console.log("User registered successfully");
         } catch (error) {
             alert("Registration failed");
