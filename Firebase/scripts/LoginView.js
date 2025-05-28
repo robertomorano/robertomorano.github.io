@@ -25,14 +25,19 @@ class LoginView{
         success.innerHTML = "Login successful!";
         document.body.appendChild(success);
     }
+    showSuccessMessage(texto){
+        const success = document.createElement("div");
+        success.className = "alert alert-success";
+        success.innerHTML = texto;
+        document.body.appendChild(success);
+    }
     // Functions for the buttons
     loginAction(loginFunction){
         this.loginBtn.on("click",loginFunction);
-        console.log("Login action set");
+        
     }
     registerAction(registerFunction){
         this.registerBtn.on("click",registerFunction);
-        console.log("Register action set");
     }
 
 }

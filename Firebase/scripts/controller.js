@@ -1,51 +1,56 @@
 import UsuarioModelo from './UserModel.js';
 import LoginView from './LoginView.js';
 
-
 class Controller {
-  
-    constructor(initializeApp, getAnalytics, getAuth) {
-    
-    this.view = new LoginView();
-    this.model = new UsuarioModelo(initializeApp, getAnalytics, getAuth);
-    this.view.loginAction(this.login.bind(this));
-    this.view.registerAction(this.register.bind(this));
-    
-}
 
-    login() {
+    constructor(initializeApp, getAnalytics, getAuth) {
+        this.view = new LoginView();
+        this.model = new UsuarioModelo(initializeApp, getAnalytics, getAuth);
+        this.view.loginAction(this.login.bind(this));
+        this.view.registerAction(this.register.bind(this));
+    }
+
+    async login(e) {
+        e.preventDefault();
         const data = this.view.getData();
         this.view.cleanInputs();
         if (data) {
-            if(this.model.iniciarSesion(data.username, data.password)){
-          this.view.showSuccessMessage();
-          console.log("Login successful");
-          return true;
-        }else{
-          alert("Invalid username or password");
-          return false;
-        }
+            try {
+                await this.model.iniciarSesion(data.username, data.password);
+                this.view.showSuccessMessage();
+                console.log("Login successful");
+                return true;
+            } catch (error) {
+                alert("Invalid username or password");
+                this.view.showSuccessMessage("Invalid username or password");
+                console.error(error);
+                return false;
+            }
         }
     }
-    register() {
+
+    async register(e) {
+        e.preventDefault();
         const data = this.view.getData();
         this.view.cleanInputs();
         if (data) {
             console.log("Registering user");
-            this.registerUser(data.username, data.password);
-            console.log("User registered successfully");
+            await this.registerUser(data.username, data.password);
         }
     }
-    
-      registerUser(username, password) {
-        if(this.model.registrarUsuario(username, password)){
-          this.model.guardarDatosUsuario(username, { username: username });
-          this.view.showSuccessMessage();
-          console.log("User registered successfully");
-        }else{
-          alert("Registration failed");
+
+    async registerUser(username, password) {
+        try {
+            const userCredential = await this.model.registrarUsuario(username, password);
+            await this.model.guardarDatosUsuario(userCredential.user.uid, { username: username });
+            this.view.showSuccessMessage();
+            console.log("User registered successfully");
+        } catch (error) {
+            alert("Registration failed");
+            this.view.showSuccessMessage("Registration failed");
+            console.error(error);
         }
-      }
-      
+    }
 }
+
 export default Controller;
